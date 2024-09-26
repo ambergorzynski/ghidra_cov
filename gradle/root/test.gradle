@@ -30,6 +30,7 @@
  * aren't set by a calling script, we default them.
  *
  *********************************************************************************/
+apply plugin:'jacoco'
 apply from: "gradle/support/testUtils.gradle"
 
 if (!project.hasProperty('rootTestDir')) {
@@ -401,6 +402,7 @@ task integrationTestReport(type: TestReport) { t ->
     destinationDirectory = file("$reportDir/integrationTests")
 	outputs.upToDateWhen {false}
 }
+
 
 /*********************************************************************************
  * TARGETED TEST REPORT
