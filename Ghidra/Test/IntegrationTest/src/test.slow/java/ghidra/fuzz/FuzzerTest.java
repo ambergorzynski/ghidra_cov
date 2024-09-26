@@ -2,7 +2,7 @@ package ghidra.program.fuzz;
 
 import static org.junit.Assert.*;
 
-import org.junit.*;
+import org.junit.jupiter.api.Test;
 
 import ghidra.app.util.headless.AnalyzeHeadless;
 import ghidra.GhidraApplicationLayout;
