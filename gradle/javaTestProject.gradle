@@ -22,7 +22,15 @@
 
 		apply from: "$rootProject.projectDir/gradle/support/javaTestProject.gradle"
  *****************************************************************************************/
+apply plugin: 'jacoco'
+apply plugin: 'java'
 
+dependencies {
+   jacocoAnt 'org.jacoco:org.jacoco.ant:0.8.11'
+   jacocoAgent 'org.jacoco:org.jacoco.agent:0.8.11'
+}
+   
+/*
 test { t ->
 
 	forkEvery 1
@@ -41,7 +49,9 @@ test { t ->
 	
 	// Do not include suite classes; they trigger the tests in the suite to get run twice
 	// (once by normal jUnit and again when the suite runs).
-	excludes = ['**/*Suite*']
+	*/
+	//excludes = ['**/*Suite*']
+	/*
 
 	doFirst {
 		startTestTimer(t)
@@ -50,7 +60,7 @@ test { t ->
 		endTestTimer(t)
 	}
 }
-
+*/
 task integrationTest (type: Test) { t ->
 	group "test"
 	dependsOn { project(":FunctionID").unpackFidDatabases }	
@@ -73,6 +83,55 @@ task integrationTest (type: Test) { t ->
 	doLast {
 		endTestTimer(t)
 	}
+}
+
+jacoco {
+	toolVersion = "0.8.12"
+	reportsDirectory = layout.buildDirectory.dir('customJacocoReportDir')
+}
+
+jacocoTestReport {
+
+	dependsOn { subprojects.findAll { p -> p.plugins.hasPlugin('jacoco') }.test }
+
+	reports {
+		xml.required = true
+		csv.required = true
+		html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+	}
+
+	sourceDirectories = files({ subprojects.findAll { p -> p.plugins.hasPlugin('jacoco') }.sourceSets.main.java.srcDirs })  
+   	classDirectories = files({ subprojects.findAll { p -> p.plugins.hasPlugin('jacoco') }.sourceSets.main.output}).asFileTree
+	
+	//def mainSrc = sourceSets.main.java.srcDirs
+	//def javaTree = sourceSets.main.output.asFileTree
+
+	//sourceDirectories = files([mainSrc])
+	//classDirectories = files([javaTree])
+	
+	executionData = fileTree(rootDir) {
+    	include '**/*.exec'
+   	}
+}
+
+task fuzztest (type: Test) { 
+	group "fuzztest"
+
+	useJUnitPlatform()
+		
+	// Must set this to see System.out print statements.
+	testLogging.showStandardStreams = true
+
+	//dependsOn { project(":FunctionID").unpackFidDatabases }	
+	testClassesDirs = files sourceSets.integrationTest.output.classesDirs
+	classpath = sourceSets.integrationTest.runtimeClasspath
+
+	filter {
+		includeTestsMatching "FuzzerTest*"
+	}
+
+	finalizedBy jacocoTestReport
+
 }
 
 task pcodeTest (type: Test) { t ->	
