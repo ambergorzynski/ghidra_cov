@@ -1,6 +1,7 @@
 excludedFiles.txt
 ghidra.repos.config
 todo.md
+jacocoReport/
 
 # Misc files produced while executing application
 repositories/
