@@ -70,8 +70,11 @@ List excludesList = generateExcludesList()
 task jacocoReport(type: JacocoReport, group: 'Coverage reports') {
    description = 'Generates an aggregate Jacoco report from all subprojects'
 
-   dependsOn { subprojects.findAll { p -> p.plugins.hasPlugin('jacoco') }.test }
-   dependsOn { subprojects.findAll { p -> p.plugins.hasPlugin('jacoco') }.integrationTest }
+   //dependsOn { subprojects.findAll { p -> p.plugins.hasPlugin('jacoco') }.test }
+   //dependsOn { subprojects.findAll { p -> p.plugins.hasPlugin('jacoco') }.integrationTest }
+   dependsOn(':IntegrationTest:fuzztest')
+   dependsOn(':IntegrationTest:jacocoTestReport')
+
 
    executionData fileTree(rootDir) {
      include '**/*.exec'
@@ -85,6 +88,10 @@ task jacocoReport(type: JacocoReport, group: 'Coverage reports') {
    additionalClassDirs files({ subprojects.findAll { p -> p.plugins.hasPlugin('jacoco') }.sourceSets.main.output }).asFileTree.matching {
       exclude excludesList
    }
+
+   //filter {
+	//	includeTestsMatching "*FuzzerTest*"
+	//}
   
    reports {
       html {
