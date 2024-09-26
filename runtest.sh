@@ -4,5 +4,4 @@ GHIDRA=/data/dev/ghidra_cov
 
 cd $GHIDRA
 
-gradle :IntegrationTest:integrationTest --tests FuzzerTest -x sleighCompile -x buildHelp
-
+gradle jacocoReport -x sleighCompile -x buildHelp
