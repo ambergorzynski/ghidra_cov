@@ -55,6 +55,15 @@ void ArchitectureGhidra::segvHandler(int4 sig)
   exit(1);	// Just die - prevents OS from popping-up a dialog
 }
 
+// Handle SIGTERM so that .gcda coverage files are produced when the
+// deecompiler process is terminated from the Ghidra process
+void ArchitectureGhidra::termHandler(int4 sig)
+
+{
+  __gcov_dump();
+  exit(0);	
+}
+
 /// All communications between the Ghidra client and the decompiler are surrounded
 /// by alignment bursts. A burst is 1 or more zero bytes followed by
 /// an 0x01 byte, then followed by a code byte.

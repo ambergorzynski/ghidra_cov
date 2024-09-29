@@ -512,7 +512,9 @@ int main(int argc,char **argv)
 {
   using namespace ghidra;
 
+  signal(SIGTERM, &ArchitectureGhidra::termHandler); // Shut down gracefully on termination
   signal(SIGSEGV, &ArchitectureGhidra::segvHandler);  // Exit on SEGV errors
+
 #ifdef _WINDOWS
   // Force i/o streams to be in binary mode
   _setmode(_fileno(stdin), _O_BINARY);

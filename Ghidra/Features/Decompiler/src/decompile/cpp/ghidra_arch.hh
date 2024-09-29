@@ -21,6 +21,8 @@
 
 #include "architecture.hh"
 
+extern "C" void __gcov_dump(); ///< For producing coverage data using gcov
+
 namespace ghidra {
 
 extern ElementId ELEM_COMMAND_ISNAMEUSED;		///< Marshaling element \<command_isnameused>
@@ -155,6 +157,7 @@ public:
   void getStringData(vector<uint1> &buffer,const Address &addr,Datatype *ct,int4 maxBytes,bool &isTrunc);
   virtual void printMessage(const string &message) const;
 
+  static void termHandler(int4 sig);				///< Handler for a terminate (SIGTERM) signal
   static void segvHandler(int4 sig);				///< Handler for a segment violation (SIGSEGV) signal
   static int4 readToAnyBurst(istream &s);			///< Read the next message protocol marker
   static bool readBoolStream(istream &s);			///< Read a boolean value from the client
