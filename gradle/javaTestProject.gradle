@@ -30,7 +30,7 @@ dependencies {
    jacocoAgent 'org.jacoco:org.jacoco.agent:0.8.11'
 }
    
-/*
+
 test { t ->
 
 	forkEvery 1
@@ -49,9 +49,9 @@ test { t ->
 	
 	// Do not include suite classes; they trigger the tests in the suite to get run twice
 	// (once by normal jUnit and again when the suite runs).
-	*/
-	//excludes = ['**/*Suite*']
-	/*
+	
+	excludes = ['**/*Suite*']
+	
 
 	doFirst {
 		startTestTimer(t)
@@ -60,7 +60,7 @@ test { t ->
 		endTestTimer(t)
 	}
 }
-*/
+
 task integrationTest (type: Test) { t ->
 	group "test"
 	dependsOn { project(":FunctionID").unpackFidDatabases }	
