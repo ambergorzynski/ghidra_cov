@@ -1,0 +1,51 @@
+<classes>
+        <class>
+            <path>/data/work/fuzzflesh/coverage/ghidra/fuzzflesh/out/graph_0/prog_0_path_0.o</path>
+            <name>prog_0_path_0</name>
+        </class>
+    
+        <class>
+            <path>/data/work/fuzzflesh/coverage/ghidra/fuzzflesh/out/graph_1/prog_1_path_0.o</path>
+            <name>prog_1_path_0</name>
+        </class>
+    
+        <class>
+            <path>/data/work/fuzzflesh/coverage/ghidra/fuzzflesh/out/graph_2/prog_2_path_0.o</path>
+            <name>prog_2_path_0</name>
+        </class>
+    
+        <class>
+            <path>/data/work/fuzzflesh/coverage/ghidra/fuzzflesh/out/graph_3/prog_3_path_0.o</path>
+            <name>prog_3_path_0</name>
+        </class>
+    
+        <class>
+            <path>/data/work/fuzzflesh/coverage/ghidra/fuzzflesh/out/graph_4/prog_4_path_0.o</path>
+            <name>prog_4_path_0</name>
+        </class>
+    
+        <class>
+            <path>/data/work/fuzzflesh/coverage/ghidra/fuzzflesh/out/graph_5/prog_5_path_0.o</path>
+            <name>prog_5_path_0</name>
+        </class>
+    
+        <class>
+            <path>/data/work/fuzzflesh/coverage/ghidra/fuzzflesh/out/graph_6/prog_6_path_0.o</path>
+            <name>prog_6_path_0</name>
+        </class>
+    
+        <class>
+            <path>/data/work/fuzzflesh/coverage/ghidra/fuzzflesh/out/graph_7/prog_7_path_0.o</path>
+            <name>prog_7_path_0</name>
+        </class>
+    
+        <class>
+            <path>/data/work/fuzzflesh/coverage/ghidra/fuzzflesh/out/graph_8/prog_8_path_0.o</path>
+            <name>prog_8_path_0</name>
+        </class>
+    
+        <class>
+            <path>/data/work/fuzzflesh/coverage/ghidra/fuzzflesh/out/graph_9/prog_9_path_0.o</path>
+            <name>prog_9_path_0</name>
+        </class>
+    </classes>
