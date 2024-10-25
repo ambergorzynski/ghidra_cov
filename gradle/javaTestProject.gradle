@@ -22,6 +22,8 @@
 
 		apply from: "$rootProject.projectDir/gradle/support/javaTestProject.gradle"
  *****************************************************************************************/
+apply plugin: 'jacoco'
+apply plugin: 'java'
 
 dependencies {
    jacocoAnt 'org.jacoco:org.jacoco.ant:0.8.11'
