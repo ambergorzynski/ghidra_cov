@@ -2,6 +2,9 @@ excludedFiles.txt
 ghidra.repos.config
 todo.md
 jacocoReport/
+*.gcov
+*.gcda
+*.gcno
 
 # Misc files produced while executing application
 repositories/
