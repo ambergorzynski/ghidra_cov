@@ -4,13 +4,9 @@ import static org.junit.Assert.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-<<<<<<< HEAD
-import org.junit.*;
-=======
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
->>>>>>> cbd1ca69b8 (Parameterize fuzzing tests to read test locations from xml file)
 
 import ghidra.app.util.headless.AnalyzeHeadless;
 import ghidra.GhidraApplicationLayout;

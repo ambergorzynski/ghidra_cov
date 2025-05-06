@@ -82,6 +82,55 @@ task integrationTest (type: Test) { t ->
 		endTestTimer(t)
 	}
 }
+jacoco {
+	toolVersion = "0.8.12"
+	reportsDirectory = layout.buildDirectory.dir('customJacocoReportDir')
+}
+
+jacocoTestReport {
+
+	dependsOn { subprojects.findAll { p -> p.plugins.hasPlugin('jacoco') }.test }
+
+	reports {
+		xml.required = true
+		csv.required = true
+		html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+	}
+
+	sourceDirectories = files({ subprojects.findAll { p -> p.plugins.hasPlugin('jacoco') }.sourceSets.main.java.srcDirs })  
+   	classDirectories = files({ subprojects.findAll { p -> p.plugins.hasPlugin('jacoco') }.sourceSets.main.output}).asFileTree
+
+	//def mainSrc = sourceSets.main.java.srcDirs
+	//def javaTree = sourceSets.main.output.asFileTree
+
+	//sourceDirectories = files([mainSrc])
+	//classDirectories = files([javaTree])
+
+	executionData = fileTree(rootDir) {
+    	include '**/*.exec'
+   	}
+}
+
+task fuzztest (type: Test) { 
+	group "fuzztest"
+
+	useJUnitPlatform()
+
+	// Must set this to see System.out print statements.
+	testLogging.showStandardStreams = true
+
+	//dependsOn { project(":FunctionID").unpackFidDatabases }	
+	testClassesDirs = files sourceSets.integrationTest.output.classesDirs
+	classpath = sourceSets.integrationTest.runtimeClasspath
+
+	filter {
+		includeTestsMatching "FuzzerTest*"
+	}
+
+	finalizedBy jacocoTestReport
+
+}
+
 
 task pcodeTest (type: Test) { t ->	
     group "pcodeTest"	
