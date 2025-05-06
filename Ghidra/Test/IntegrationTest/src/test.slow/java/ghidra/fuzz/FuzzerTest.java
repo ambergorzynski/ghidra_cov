@@ -21,7 +21,7 @@ public class FuzzerTest {
   	@FuzzerTestDataSource("fuzzer_classes.xml")
 	public void fuzzTest(Path testFilePath) throws Exception {
 
-		String outputDir = "/data/work/fuzzflesh/coverage/ghidra";
+		String outputDir = "/data/dev/fuzzflesh/data/coverage_results/raw/coverage_outputs/ghidra";
 		String program = testFilePath.toString();
 		String headlessPath = "/data/dev/fuzzflesh/src/fuzzflesh/harness/c";
 		String headlessScriptName = "DecompileHeadless.java";
